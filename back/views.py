@@ -26,20 +26,33 @@ class BankDetail(RetrieveUpdateDestroyAPIView):
 
 
 class AccountView(ListCreateAPIView):
-    queryset = Account.objects.all()
     serializer_class = AccountSerial
+
+    def get_queryset(self):
+        bank = self.kwargs['pk']
+        return Account.objects.filter(bank=bank)
 
 
 class AccountDetail(RetrieveUpdateDestroyAPIView):
-    queryset = Account.objects.all()
     serializer_class = AccountSerial
+
+    def get_queryset(self):
+        bank = self.kwargs['b_pk']
+        return Account.objects.filter(bank=bank)
 
 
 class MovementView(ListCreateAPIView):
-    queryset = Movement.objects.all()
     serializer_class = MovementSerial
+
+    def get_queryset(self):
+        account = self.kwargs['pk']
+        return Movement.objects.filter(account=account)
 
 
 class MovementDetail(RetrieveUpdateDestroyAPIView):
     queryset = Movement.objects.all()
     serializer_class = MovementSerial
+
+    def get_queryset(self):
+        account = self.kwargs['a_pk']
+        return Movement.objects.filter(account=account)
