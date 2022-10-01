@@ -8,9 +8,15 @@ import React from 'react';
 
 
 import Header from './components/Header'
+
+
 import HomeScreen from './screens/HomeScreen'
-import BankScreen from './screens/BankScreen'
-import MovementScreen from './screens/MovementScreen'
+import BankList from './screens/BankList'
+import BankDetail from './screens/BankDetail'
+import MovementList from './screens/MovementList'
+import MovementDetail from './screens/MovementDetail'
+import AccountList from './screens/AccountList'
+import AccountDetail from './screens/AccountDetail'
 
 function App() {
 
@@ -20,8 +26,12 @@ function App() {
       <Container>
         <Routes>
           <Route path="/" element={<HomeScreen/>} exact />
-          <Route path="/banks" element={<BankScreen/>} />
-          <Route path="/movements" element={<MovementScreen/>} />
+          <Route path="/banks" element={<BankList/>} />
+          <Route path="/banks/:pk" element={<BankDetail/>} />
+          <Route path="/:id/accounts" element={<AccountList/>} />
+          <Route path="/:id/accounts/:pk" element={<AccountDetail/>} />
+          <Route path="/:id/movements" element={<MovementList/>} />
+          <Route path="/:id/movements/:pk" element={<MovementDetail/>} />
         </Routes>
       </Container>
     </Router>

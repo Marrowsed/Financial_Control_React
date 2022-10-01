@@ -14,7 +14,7 @@ const MovementList = () =>{
       .then(data => {
         setMovement(data)
       })
-    }, [])
+    }, [params.id, params.pk])
 
     return(
         <section>

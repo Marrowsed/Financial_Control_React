@@ -1,24 +1,68 @@
 import Movement from '../components/Movement'
+//import SearchBox from '../components/SearchBox';
+
+
 import React, {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, useSearchParams, useNavigate} from 'react-router-dom';
+import { Button, Form } from 'react-bootstrap'
 
 const MovementList = () =>{
 
     const params = useParams()
 
     const[movements, setMovement] = useState([])
+    const[searchParams, setSearchParams] = useSearchParams()
+
+    const searchHandler = (event) => {
+      let search;
+      if (event.target.value) {
+        search = {
+          created_at: event.target.value
+        }
+      } else {
+        search = undefined;
+      }
+  
+      setSearchParams(search, { replace: true });
+    }
+
+    const navigate = useNavigate();
+
+    const submitHandler = (e) => {
+        e.preventDefault()
+        if (searchParams) {
+            navigate(`?${searchParams}`)
+        }
+         else {
+            alert("ERROR")
+        }
+      }
 
     useEffect(() => {
-      fetch(`http://127.0.0.1:8000/api/${params.id}/movements/`)
-      .then(response => response.json())
-      .then(data => {
-        setMovement(data)
+        fetch(`http://127.0.0.1:8000/api/${params.id}/movements?${searchParams}`)
+        .then(response => response.json())
+        .then(data => {
+          setMovement(data)
       })
-    }, [])
+    }, [params.id, searchParams])
 
     return(
         <section>
         <div className='row ml-4 text-center'>
+        <Form onSubmit={submitHandler} inline>
+            <input
+              type='date'
+              value={searchParams.created_at}
+              onChange={searchHandler}
+              placeholder='Search...'
+              style={{ width: '300px', padding: '8px 15px', fontSize: '16px' }}
+        />
+            <Button
+                type='submit'
+                variant='outline-success'
+                className='p-2'
+            >Search</Button>
+        </Form>
         <table className='table table-hover'>
             <thead>
                 <tr>
