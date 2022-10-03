@@ -49,10 +49,13 @@ class MovementView(ListCreateAPIView):
         return Movement.objects.filter(account=account)
 
 
-class MovementDetail(RetrieveUpdateDestroyAPIView):
+class MovementMonthYearView(ListAPIView):
     queryset = Movement.objects.all()
     serializer_class = MovementSerial
+    filterset_fields = ['p_choice']
 
     def get_queryset(self):
         account = self.kwargs['a_pk']
-        return Movement.objects.filter(account=account)
+        month = self.kwargs['month']
+        year = self.kwargs['year']
+        return Movement.objects.filter(account=account, created_at__month=month, created_at__year=year)

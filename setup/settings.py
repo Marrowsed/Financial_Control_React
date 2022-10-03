@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'back',
     'rest_framework',
     'corsheaders',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -147,5 +148,6 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 REST_FRAMEWORK = {
-    'DATETIME_FORMAT': "%d-%m-%Y %H:%M:%S",
+    'DATETIME_FORMAT': "%d-%m-%Y",
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
