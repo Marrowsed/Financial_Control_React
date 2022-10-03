@@ -1,4 +1,6 @@
+from rest_framework import status
 from rest_framework.generics import *
+from rest_framework.response import Response
 
 from .serializer import *
 
@@ -55,7 +57,7 @@ class MovementMonthYearView(ListAPIView):
     filterset_fields = ['p_choice']
 
     def get_queryset(self):
-        account = self.kwargs['a_pk']
+        account = self.kwargs['pk']
         month = self.kwargs['month']
         year = self.kwargs['year']
         return Movement.objects.filter(account=account, created_at__month=month, created_at__year=year)
