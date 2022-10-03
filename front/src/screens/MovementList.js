@@ -1,61 +1,37 @@
-import Movement from '../components/Movement'
-//import SearchBox from '../components/SearchBox';
-
-
-import React, {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
+import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap'
+import {useParams} from 'react-router-dom';
 
 const MovementList = () =>{
 
     const params = useParams()
-    let date, mid_date, final_date = "";
-
-    const[movements, setMovement] = useState([])
-    
-    useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/${params.id}/movements`)
-        .then(response => response.json())
-        .then(data => {
-          setMovement(data)
-      })
-    }, [params.id])
-    
-    date = movements.created_at
-    mid_date = date.split('-')
-    final_date = mid_date[0] + "/" + mid_date[1]
+    const months = ['01/2022', '02/2022', '03/2022', '04/2022', '05/2022', '06/2022', '07/2022', '08/2022', '09/2022', '10/2022', '11/2022', '12/2022']
+    const list = months.map(m => 
+      <tr>
+        <td key={m}>{m}</td>
+        <td>
+          <LinkContainer to={`${m}`}>
+            <button className='btn btn-outline-info'>View</button>
+          </LinkContainer>
+        </td>
+      </tr>)
 
     return(
         <section>
+          <LinkContainer to={`/${params.id}/accounts`}>
+            <button className='btn btn-outline-success'>Back to Account</button>
+          </LinkContainer>
         <div className='row ml-4 text-center'>
         <table className='table table-hover'>
-            <thead>
-                <tr>
-                    <th>Month/Year</th>
-                    <th>Total Debit</th>
-                    <th>Total Credit</th>
-                    <th>Total Savings</th>
-                    <th></th>
-                </tr>
-            </thead>
-        {
-        movements.map( m =>
-            <tbody>
+          <thead>
               <tr>
-                <td>{final_date}</td>
-                <td>Total Debit</td>
-                <td>Total Credit</td>
-                <td>Total Savings</td>
-                <td>
-                <LinkContainer to={`${final_date}`}>
-                  <button className='btn btn-outline-info mx-auto'>Detail</button>
-                </LinkContainer>
-                </td>
+                <th>Month/Year</th>
+                <th></th>
               </tr>
-            </tbody>
-        )
-        }    
-        
+            </thead>
+            <tbody>
+                {list}
+            </tbody>  
         </table>
         </div>
       </section>
