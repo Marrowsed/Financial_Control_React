@@ -14,7 +14,7 @@ import HomeScreen from './screens/HomeScreen'
 import BankList from './screens/BankList'
 import BankDetail from './screens/BankDetail'
 import MovementList from './screens/MovementList'
-import MovementDetail from './screens/MovementDetail'
+import MovementMonthYearList from './screens/MovementMonthYearList'
 import AccountList from './screens/AccountList'
 import AccountDetail from './screens/AccountDetail'
 
@@ -31,7 +31,7 @@ function App() {
           <Route path="/:id/accounts" element={<AccountList/>} />
           <Route path="/:id/accounts/:pk" element={<AccountDetail/>} />
           <Route path="/:id/movements" element={<MovementList/>} />
-          <Route path="/:id/movements/:pk" element={<MovementDetail/>} />
+          <Route path="/:id/movements/:month/:year" element={<MovementMonthYearList/>} />
         </Routes>
       </Container>
     </Router>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap'
 import {useParams} from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap'
 
 const MovementList = () =>{
 
@@ -18,9 +19,19 @@ const MovementList = () =>{
 
     return(
         <section>
-          <LinkContainer to={`/${params.id}/accounts`}>
-            <button className='btn btn-outline-success'>Back to Account</button>
-          </LinkContainer>
+          <Row className='align-items-center'>
+                <Col className='text-left'>
+                  <LinkContainer to={`/${params.id}/accounts`}>
+                    <button className='btn btn-outline-success'>Back to Account</button>
+                  </LinkContainer>
+                </Col>
+                <Col className='text-end'>
+                  <LinkContainer to={`/${params.id}/movements/add`}>
+                    <button className='btn btn-outline-info'>Add Movement</button>
+                  </LinkContainer>
+                </Col>
+            </Row>
+          
         <div className='row ml-4 text-center'>
         <table className='table table-hover'>
           <thead>
