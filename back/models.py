@@ -39,7 +39,7 @@ class Account(models.Model):
         Sum all the payments and return limits
         """
         credit = self.movement_set.filter(p_choice='C')
-        total = sum([item.value for item in credit])
+        total = sum([item.get_value for item in credit])
         return total
 
     @property
@@ -48,7 +48,7 @@ class Account(models.Model):
         Sum all the savings and return
         """
         savings = self.movement_set.filter(p_choice='S')
-        total = sum([item.value for item in savings])
+        total = sum([item.get_value for item in savings])
         return total
 
     @property
@@ -57,7 +57,7 @@ class Account(models.Model):
         Return total value of the account
         """
         debit = self.movement_set.filter(p_choice='D')
-        total = sum([item.value for item in debit])
+        total = sum([item.get_value for item in debit])
         return total
 
 
@@ -67,14 +67,32 @@ class Movement(models.Model):
         ('D', 'Debit'),
         ('S', 'Savings')
     )
+    p_type = (
+        ('D', 'Deposit'),
+        ('W', 'Withdrawal')
+    )
+
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     p_choice = models.CharField(max_length=1, choices=p_choice)
+    p_type = models.CharField(max_length=1, choices=p_type)
     p_months = models.IntegerField(default=0, blank=True)
     description = models.CharField(max_length=200)
     value = models.DecimalField(decimal_places=2, max_digits=20)
-    created_at = models.DateField(auto_now=True)
+    created_at = models.DateField(auto_created=True)
 
     def __str__(self):
-        return f"{self.description} - ${self.value}"
+        return f"{self.description} - {self.p_choice} - ${self.get_value} - {self.p_type}"
+
+    @property
+    def get_value(self):
+        if self.p_type == 'D':
+            return self.value
+        else:
+            return self.value * -1
+
+
+
+
+
 
 
