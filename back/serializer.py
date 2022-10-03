@@ -27,7 +27,8 @@ class MovementSerial(serializers.ModelSerializer):
     Value = serializers.DecimalField(source='value', decimal_places=2, max_digits=20)
     """
     p_choice = serializers.CharField(source='get_p_choice_display')
+    get_value = serializers.ReadOnlyField()
     class Meta:
         model = Movement
         #fields = ('account', 'Type', 'Months', 'Description', 'Value')
-        fields = "__all__"
+        fields = ('id', 'account', 'p_choice', 'p_months', 'description', 'get_value', 'created_at')
