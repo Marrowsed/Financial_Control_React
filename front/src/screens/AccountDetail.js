@@ -14,7 +14,7 @@ const AccountDetail = () =>{
       .then(data => {
         setAccount(data)
       })
-    }, []) 
+    }, [params.id, params.pk]) 
 
     const getLimit = () => {
       return "$" + parseInt(accounts.limit - accounts.get_credit)

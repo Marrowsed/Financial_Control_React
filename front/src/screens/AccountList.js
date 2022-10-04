@@ -15,7 +15,7 @@ const AccountList = () =>{
         setAccount(data)
         console.log(data)
       })
-    }, [])
+    }, [params.id])
 
     return(
         <section>
