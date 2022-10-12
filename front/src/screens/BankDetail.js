@@ -13,7 +13,7 @@ const BankDetail = () => {
       .then(data => {
         setBanks(data)
       })
-    }, [])
+    }, [params.id])
 
     return(
         <section>
