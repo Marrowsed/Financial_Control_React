@@ -49,3 +49,24 @@ React is going to bee your frontend ! Just enter <a href="localhost:8000">localh
 And see the magic happens !
 
 Enjoy your Financial Control !
+
+<h2>Dependencies</h2>
+
+```sh
+pip install -r requirements.txt
+```
+
+<h1> Config </h1>
+<ol>
+  <li>Create an `.env` file in the same folder where `migrate.py` is.</li>
+  <li>In your terminal with venv, execute `python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'` generating a new secret key</li>
+  <li>Insert the new secret key in `.env` file like this: `SECRET_KEY = oahsdodjifodjfodjfpadjpajsdpojsd` .</li>
+  <li>Insert the database URL in the `.env` file like this: `DATABASE_URL = your_db://your_db:password@localhost/my_db`.</li>
+  <li>Run `python manage.py migrate` and create the tables</li>
+</ol>
+
+<h1>Running</h1>
+
+```sh
+python manage.py runserver
+```
