@@ -19,3 +19,33 @@ Never lose your Financial Control again !
 
 <h1> Install </h1>
 <a href="https://www.python.org/downloads/" target="_blank">Python</a> latest
+
+<a href="https://nodejs.org/en/">Node.js</a> latest
+
+# How to use It ?
+
+### Bank [GET/POST/PUT/DELETE]
+* /banks/ [GET/POST]
+* /banks/:id/ [GET/PUT/DELETE]
+
+To return/create/update and delete the Banks you use 
+
+### Accounts [GET/POST/PUT/DELETE]
+* /:bank_id/accounts/ [GET/POST]
+* /:bank_id/accounts/:id [GET/PUT/DELETE]
+
+To return/create/update and delete the Accounts you use
+
+### Movements [GET/POST/PUT]
+* /:account_id/movements/ [GET/POST/PUT]
+* /:account_id/movements/:year/:month [GET]
+
+To return/create and delete the Movements you make in the account
+
+# Where is React ?
+
+React is going to bee your frontend ! Just enter <a href="localhost:8000">localhost:8000</a> or <a href="127.0.0.1:8000">127.0.0.1:8000</a>
+
+And see the magic happens !
+
+Enjoy your Financial Control !
